@@ -5,6 +5,7 @@
     <class>com.adam.model.Penjualan</class>
     <class>com.adam.model.Pembelian</class>
     <class>com.adam.model.Setting</class>
+    <class>com.adam.model.Persediaan</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/jbgas_DB"/>
       <property name="javax.persistence.jdbc.password" value="Bangga"/>

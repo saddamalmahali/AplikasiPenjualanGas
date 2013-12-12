@@ -6,8 +6,11 @@
 
 package com.adam.view;
 
+import com.adam.dao.PersediaanDao;
 import com.adam.dao.SettingDao;
+import com.adam.dao.impl.PersediaanDaoImpl;
 import com.adam.dao.impl.SettingDaoImpl;
+import com.adam.model.Persediaan;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,18 +26,21 @@ public class FormAplikasi extends javax.swing.JFrame {
      * Creates new form FormAplikasi
      */
     
-    SettingDao dao;
+    SettingDao sDao;
     Setting settingView;
-    
+    PersediaanDao pDao;
+    Persediaan persediaan;
     com.adam.model.Setting setting;
     public FormAplikasi() {
         initComponents();
         
         
-        dao = new SettingDaoImpl();
+        sDao = new SettingDaoImpl();
+        pDao = new PersediaanDaoImpl();
+        persediaan = new Persediaan(1);
         setting = new com.adam.model.Setting(1);
         refresh();
-        
+        txtHrgDefault.setText("Rp. "+setting.getHrgStg());
     }
 
     /**
@@ -49,9 +55,9 @@ public class FormAplikasi extends javax.swing.JFrame {
         layerAplikasi = new javax.swing.JDesktopPane();
         jToolBar1 = new javax.swing.JToolBar();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtPrsdGas = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtHrgDefault = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -80,14 +86,14 @@ public class FormAplikasi extends javax.swing.JFrame {
         jLabel1.setText("Persediaan Gas : ");
         jToolBar1.add(jLabel1);
 
-        jTextField1.setEditable(false);
-        jToolBar1.add(jTextField1);
+        txtPrsdGas.setEditable(false);
+        jToolBar1.add(txtPrsdGas);
 
         jLabel2.setText("  Harga Satuan Gas : ");
         jToolBar1.add(jLabel2);
 
-        jTextField2.setEditable(false);
-        jToolBar1.add(jTextField2);
+        txtHrgDefault.setEditable(false);
+        jToolBar1.add(txtHrgDefault);
 
         jMenu1.setText("Menu");
 
@@ -149,6 +155,7 @@ public class FormAplikasi extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Internal Penjualan telah aktif..");
         }else{
             layerAplikasi.add(intPjl);
+            intPjl.setSetting(setting);
             
         intPjl.setVisible(true);
         try {
@@ -162,8 +169,8 @@ public class FormAplikasi extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         settingView = new Setting(this, true);
-        settingView.setDao(dao);
-        settingView.setTxtHrg(String.valueOf(dao.getSetting(setting).getHrgStg()));
+        settingView.setDao(sDao);
+        settingView.setTxtHrg(String.valueOf(sDao.getSetting(setting).getHrgStg()));
         
         settingView.setVisible(true);
         settingView.setAlwaysOnTop(true);
@@ -172,7 +179,10 @@ public class FormAplikasi extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
     
     public void refresh(){
-        setting = dao.getSetting(new com.adam.model.Setting(1));
+        setting = sDao.getSetting(new com.adam.model.Setting(1));
+        persediaan = pDao.getPersediaan(new Persediaan(1));
+        txtHrgDefault.setText("Rp. "+setting.getHrgStg());
+        txtPrsdGas.setText(""+persediaan.getJmlPrsd()+" tabung");
     }
     /**
      * @param args the command line arguments
@@ -189,9 +199,9 @@ public class FormAplikasi extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JDesktopPane layerAplikasi;
+    private javax.swing.JTextField txtHrgDefault;
+    private javax.swing.JTextField txtPrsdGas;
     // End of variables declaration//GEN-END:variables
 }

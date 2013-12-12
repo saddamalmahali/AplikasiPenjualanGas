@@ -115,7 +115,7 @@
             <Property name="text" type="java.lang.String" value="Persediaan Gas : "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="txtPrsdGas">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
@@ -125,7 +125,7 @@
             <Property name="text" type="java.lang.String" value="  Harga Satuan Gas : "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2">
+        <Component class="javax.swing.JTextField" name="txtHrgDefault">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>

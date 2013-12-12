@@ -7,11 +7,16 @@
 package com.adam.view;
 
 import com.adam.dao.PenjualanDao;
+import com.adam.dao.SettingDao;
+import com.adam.dao.impl.SettingDaoImpl;
 import com.adam.model.Penjualan;
+import com.adam.model.Persediaan;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import com.adam.model.Setting;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,6 +27,8 @@ public class DialogPenjualan extends javax.swing.JDialog {
     DefaultTableModel model;
     Setting s;
     Penjualan p;
+    Persediaan prs;
+    SettingDao sDao;
     
     public void setLblJumlah(JLabel lblJumlah) {
         this.lblJumlah = lblJumlah;
@@ -35,9 +42,7 @@ public class DialogPenjualan extends javax.swing.JDialog {
         this.txtSatuan = txtSatuan;
     }
 
-    public void setTxtTanggal(JTextField txtTanggal) {
-        this.txtTanggal = txtTanggal;
-    }
+    
 
     public void setP(Penjualan p) {
         this.p = p;
@@ -46,27 +51,40 @@ public class DialogPenjualan extends javax.swing.JDialog {
     public void setS(Setting s) {
         this.s = s;
     }
+
+    public Persediaan getPrs() {
+        return prs;
+    }
+
+    public void setPrs(Persediaan prs) {
+        this.prs = prs;
+    }
     
     
     
     /**
      * Creates new form DialogPenjualan
      */
+    
+    
+    
+
+    
+    
     public DialogPenjualan(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         
         model  = new DefaultTableModel();
+        sDao = new SettingDaoImpl();
         
-        txtBanyak.setText(String.valueOf(p.getQtyPjl()));
-        txtSatuan.setText(String.valueOf(p.getHrgSatuan()));
+        
+        
+        txtSatuan.setText(String.valueOf(s.getHrgStg()));
         
     }
     
-    public Penjualan ambilData(int id){       
-        
-        return dao.getPenjualan(id);
-    }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,7 +98,6 @@ public class DialogPenjualan extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtTanggal = new javax.swing.JTextField();
         txtBanyak = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtSatuan = new javax.swing.JTextField();
@@ -88,8 +105,9 @@ public class DialogPenjualan extends javax.swing.JDialog {
         lblRp = new javax.swing.JLabel();
         lblJumlah = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        txtDate = new datechooser.beans.DateChooserCombo();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnTambah = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tambah/Edit Penjualan");
@@ -140,23 +158,23 @@ public class DialogPenjualan extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtBanyak, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-                    .addComponent(txtTanggal, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
                     .addComponent(txtSatuan, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblRp)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblJumlah)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)))
+                        .addComponent(jLabel6))
+                    .addComponent(txtDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -171,12 +189,17 @@ public class DialogPenjualan extends javax.swing.JDialog {
                     .addComponent(lblRp)
                     .addComponent(lblJumlah)
                     .addComponent(jLabel6))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButton1.setText("Exit");
 
-        jButton2.setText("Tambah/Edit");
+        btnTambah.setText("Tambah");
+        btnTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTambahActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -187,21 +210,21 @@ public class DialogPenjualan extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 46, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnTambah)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnTambah)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -213,17 +236,38 @@ public class DialogPenjualan extends javax.swing.JDialog {
         float nilai2 = Float.valueOf(txtSatuan.getText());
         float jml = nilai1*nilai2;
         
+        
         lblJumlah.setText(String.valueOf(jml));
     }//GEN-LAST:event_txtBanyakInputMethodTextChanged
 
+    private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
+        int qty = Integer.parseInt(txtBanyak.getText());
+        float harga = s.getHrgStg();
+        Date date = txtDate.getDateFormat().getCalendar().getTime();
+        float jumlah = getJumlah(qty, harga);
+        p = new Penjualan();
+        p.setTglTrskPjl(date);
+        p.setHrgSatuan(harga);
+        p.setQtyPjl(qty);
+        p.setSubTotal(jumlah);
+        
+        dao.tambah(p);
+        
+        JOptionPane.showMessageDialog(this, "Transaksi Berhasil..!!");
+    }//GEN-LAST:event_btnTambahActionPerformed
+    
+    public float getJumlah(int qty, float harga){
+        float jml = qty*harga;
+        return jml;
+    }
     /**
      * @param args the command line arguments
      */
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnTambah;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -233,7 +277,7 @@ public class DialogPenjualan extends javax.swing.JDialog {
     private javax.swing.JLabel lblJumlah;
     private javax.swing.JLabel lblRp;
     private javax.swing.JTextField txtBanyak;
+    private datechooser.beans.DateChooserCombo txtDate;
     private javax.swing.JTextField txtSatuan;
-    private javax.swing.JTextField txtTanggal;
     // End of variables declaration//GEN-END:variables
 }

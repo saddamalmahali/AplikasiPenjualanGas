@@ -14,6 +14,10 @@ import java.awt.event.MouseEvent;
 import java.sql.Date;
 import java.text.DateFormat;
 import  com.adam.model.Setting;
+import java.awt.Frame;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.DateFormatter;
@@ -46,7 +50,7 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
         p = new Penjualan();
         
         refresh();
-        
+        dp = new DialogPenjualan(null, closable);
         
         tblPenjualan.setCellSelectionEnabled(true);
         
@@ -92,6 +96,11 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
 
         btnTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/adam/img/1386468450_Create.png"))); // NOI18N
         btnTambah.setText("Tambah");
+        btnTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTambahActionPerformed(evt);
+            }
+        });
 
         btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/adam/img/1386468703_edit-notes.png"))); // NOI18N
         btnEdit.setText("Edit");
@@ -169,14 +178,18 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblPenjualanMouseClicked
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        if(dp==null){
-            dp = new DialogPenjualan(null, closable);
-        }
+        
+        JOptionPane.showMessageDialog(this, "Sedang di kerjakan");
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
+        
         
         dp.setAlwaysOnTop(true);
+        dp.setVisible(true);
+            refresh();
         
-        
-    }//GEN-LAST:event_btnEditActionPerformed
+    }//GEN-LAST:event_btnTambahActionPerformed
     
     public void refresh(){
         String[] nama = {"ID Penjualan", "Tanggal", "Qty", "Harga Satuan", "Jumlah"};
