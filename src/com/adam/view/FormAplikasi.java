@@ -47,6 +47,11 @@ public class FormAplikasi extends javax.swing.JFrame {
     private void initComponents() {
 
         layerAplikasi = new javax.swing.JDesktopPane();
+        jToolBar1 = new javax.swing.JToolBar();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -62,12 +67,27 @@ public class FormAplikasi extends javax.swing.JFrame {
         layerAplikasi.setLayout(layerAplikasiLayout);
         layerAplikasiLayout.setHorizontalGroup(
             layerAplikasiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 376, Short.MAX_VALUE)
+            .addGap(0, 598, Short.MAX_VALUE)
         );
         layerAplikasiLayout.setVerticalGroup(
             layerAplikasiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 255, Short.MAX_VALUE)
+            .addGap(0, 245, Short.MAX_VALUE)
         );
+
+        jToolBar1.setFloatable(false);
+        jToolBar1.setRollover(true);
+
+        jLabel1.setText("Persediaan Gas : ");
+        jToolBar1.add(jLabel1);
+
+        jTextField1.setEditable(false);
+        jToolBar1.add(jTextField1);
+
+        jLabel2.setText("Harga Satuan Gas : ");
+        jToolBar1.add(jLabel2);
+
+        jTextField2.setEditable(false);
+        jToolBar1.add(jTextField2);
 
         jMenu1.setText("Menu");
 
@@ -106,15 +126,19 @@ public class FormAplikasi extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(layerAplikasi)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(layerAplikasi)
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(layerAplikasi)
-                .addContainerGap())
+                .addComponent(layerAplikasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -160,6 +184,8 @@ public class FormAplikasi extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -167,6 +193,9 @@ public class FormAplikasi extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JDesktopPane layerAplikasi;
     // End of variables declaration//GEN-END:variables
 }
