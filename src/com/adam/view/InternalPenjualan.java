@@ -42,17 +42,14 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
     Penjualan p;
     Setting setting;
     DialogIsianPenjualan dis;
-    FormAplikasi frame;
-
-    
+    Frame frame;
+    DialogPenjualan dialog;
+    DialogIsianPenjualan dialog2;
     
     public void setSetting(Setting setting) {
         this.setting = setting;
     }
 
-    public void setFrame(FormAplikasi frame) {
-        this.frame = frame;
-    }
 
     
     
@@ -65,12 +62,12 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
         this.setting = setting;
         dao =  new PenjualanDaoImpl();
         p = new Penjualan();
-        dis = new DialogIsianPenjualan();
-        jDialog1.setAlwaysOnTop(true);
-        jDialog1.setLayout(new BorderLayout());
-        jDialog1.add(dis, BorderLayout.CENTER);
-        jDialog1.setSize(300, 300);
-        jDialog1.setLocationRelativeTo(null);
+        
+        frame = new Frame();
+        frame.setLocationRelativeTo(null);
+        frame.setSize(300, 300);
+        frame.pack();
+        dialog = new DialogPenjualan(frame, closable);
         
         refresh();
         
@@ -94,6 +91,8 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
         btnEdit = new javax.swing.JButton();
         btnHapus = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+
+        jDialog1.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -166,7 +165,7 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 183, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -218,11 +217,10 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
         
-        
-        jDialog1.setVisible(true);
-        
+
+        dialog.setVisible(true);
         refresh();
-        frame.refresh();
+
     }//GEN-LAST:event_btnTambahActionPerformed
     
     public void refresh(){
@@ -241,6 +239,7 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
     private void btnDialogBatalActionPerformed(java.awt.event.ActionEvent evt) {                                         
         
     }  
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEdit;

@@ -26,7 +26,7 @@ public class FormAplikasi extends javax.swing.JFrame {
     /**
      * Creates new form FormAplikasi
      */
-    DialogPenjualan dp;
+    
     SettingDao sDao;
     Setting settingView;
     PersediaanDao pDao;
@@ -158,7 +158,7 @@ public class FormAplikasi extends javax.swing.JFrame {
         }else{
             layerAplikasi.add(intPjl);
             intPjl.setSetting(setting);
-             intPjl.setFrame(this);
+             
         intPjl.setVisible(true);
         try {
             intPjl.setMaximum(true);

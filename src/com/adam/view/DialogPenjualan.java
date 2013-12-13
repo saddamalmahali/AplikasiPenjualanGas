@@ -75,12 +75,11 @@ public class DialogPenjualan extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
-        model  = new DefaultTableModel();
         sDao = new SettingDaoImpl();
         
+        float satuan = sDao.getSetting(new Setting(1)).getHrgStg();
         
-        
-        txtSatuan.setText(String.valueOf(s.getHrgStg()));
+        txtSatuan.setText(""+satuan);
         
     }
     
@@ -230,16 +229,10 @@ public class DialogPenjualan extends javax.swing.JDialog {
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     
     private void txtBanyakInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtBanyakInputMethodTextChanged
-        int nilai1 = Integer.valueOf(txtBanyak.getText());
-        float nilai2 = Float.valueOf(txtSatuan.getText());
-        float jml = nilai1*nilai2;
         
-        
-        lblJumlah.setText(String.valueOf(jml));
     }//GEN-LAST:event_txtBanyakInputMethodTextChanged
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
