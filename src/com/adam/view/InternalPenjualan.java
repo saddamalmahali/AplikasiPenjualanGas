@@ -41,10 +41,10 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
     PenjualanDao dao;
     Penjualan p;
     Setting setting;
-    DialogIsianPenjualan dis;
+    
     Frame frame;
     DialogPenjualan dialog;
-    DialogIsianPenjualan dialog2;
+    
     
     public void setSetting(Setting setting) {
         this.setting = setting;
