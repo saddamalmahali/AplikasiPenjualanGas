@@ -14,11 +14,21 @@ import java.awt.event.MouseEvent;
 import java.sql.Date;
 import java.text.DateFormat;
 import  com.adam.model.Setting;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.DateFormatter;
 
@@ -31,10 +41,17 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
     PenjualanDao dao;
     Penjualan p;
     Setting setting;
-    DialogPenjualan dp;
+    DialogIsianPenjualan dis;
+    FormAplikasi frame;
+
+    
     
     public void setSetting(Setting setting) {
         this.setting = setting;
+    }
+
+    public void setFrame(FormAplikasi frame) {
+        this.frame = frame;
     }
 
     
@@ -48,9 +65,14 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
         this.setting = setting;
         dao =  new PenjualanDaoImpl();
         p = new Penjualan();
+        dis = new DialogIsianPenjualan();
+        jDialog1.setAlwaysOnTop(true);
+        jDialog1.setLayout(new BorderLayout());
+        jDialog1.add(dis, BorderLayout.CENTER);
+        jDialog1.setSize(300, 300);
+        jDialog1.setLocationRelativeTo(null);
         
         refresh();
-        dp = new DialogPenjualan(null, closable);
         
         tblPenjualan.setCellSelectionEnabled(true);
         
@@ -65,12 +87,24 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPenjualan = new javax.swing.JTable();
         btnTambah = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnHapus = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setClosable(true);
         setIconifiable(true);
@@ -185,10 +219,10 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
         
         
-        dp.setAlwaysOnTop(true);
-        dp.setVisible(true);
-            refresh();
+        jDialog1.setVisible(true);
         
+        refresh();
+        frame.refresh();
     }//GEN-LAST:event_btnTambahActionPerformed
     
     public void refresh(){
@@ -204,12 +238,16 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
     public void initTable(){
         
     }
+    private void btnDialogBatalActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        
+    }  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnTambah;
     private javax.swing.JButton jButton5;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblPenjualan;
     // End of variables declaration//GEN-END:variables

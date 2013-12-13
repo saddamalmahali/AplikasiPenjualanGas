@@ -111,6 +111,7 @@ public class DialogPenjualan extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tambah/Edit Penjualan");
+        setAlwaysOnTop(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Detail Penjualan"));
         jPanel1.setToolTipText("");
@@ -229,6 +230,7 @@ public class DialogPenjualan extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     
     private void txtBanyakInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtBanyakInputMethodTextChanged

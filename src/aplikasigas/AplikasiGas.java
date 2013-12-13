@@ -18,11 +18,13 @@ public class AplikasiGas {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        final FormAplikasi form = new FormAplikasi();
+        form.setLocationRelativeTo(null);
         SwingUtilities.invokeLater(new Runnable() {
 
             @Override
             public void run() {
-                new FormAplikasi().setVisible(true);
+                form.setVisible(true);
             }
         });
     }

@@ -15,6 +15,7 @@ import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -25,7 +26,7 @@ public class FormAplikasi extends javax.swing.JFrame {
     /**
      * Creates new form FormAplikasi
      */
-    
+    DialogPenjualan dp;
     SettingDao sDao;
     Setting settingView;
     PersediaanDao pDao;
@@ -41,6 +42,7 @@ public class FormAplikasi extends javax.swing.JFrame {
         setting = new com.adam.model.Setting(1);
         refresh();
         txtHrgDefault.setText("Rp. "+setting.getHrgStg());
+       
     }
 
     /**
@@ -156,7 +158,7 @@ public class FormAplikasi extends javax.swing.JFrame {
         }else{
             layerAplikasi.add(intPjl);
             intPjl.setSetting(setting);
-            
+             intPjl.setFrame(this);
         intPjl.setVisible(true);
         try {
             intPjl.setMaximum(true);
