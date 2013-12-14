@@ -14,6 +14,7 @@ import com.adam.model.Persediaan;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -161,6 +162,7 @@ public class FormAplikasi extends javax.swing.JFrame {
         if(intPjl.isVisible()){
             JOptionPane.showMessageDialog(this, "Internal Penjualan telah aktif..");
         }else{
+            
             layerAplikasi.add(intPjl);
             intPjl.setSetting(setting);
              intPjl.setFormUtama(this);
