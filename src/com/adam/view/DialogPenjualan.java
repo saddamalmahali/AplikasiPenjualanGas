@@ -8,6 +8,7 @@ package com.adam.view;
 
 import com.adam.dao.PenjualanDao;
 import com.adam.dao.SettingDao;
+import com.adam.dao.impl.PenjualanDaoImpl;
 import com.adam.dao.impl.SettingDaoImpl;
 import com.adam.model.Penjualan;
 import com.adam.model.Persediaan;
@@ -16,6 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import com.adam.model.Setting;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -76,7 +79,8 @@ public class DialogPenjualan extends javax.swing.JDialog {
         initComponents();
         
         sDao = new SettingDaoImpl();
-        
+        dao = new PenjualanDaoImpl();
+        p = new Penjualan();
         float satuan = sDao.getSetting(new Setting(1)).getHrgStg();
         
         txtSatuan.setText(""+satuan);
@@ -105,7 +109,7 @@ public class DialogPenjualan extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         txtDate = new datechooser.beans.DateChooserCombo();
         cboBanyak = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
         btnTambah = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -140,6 +144,11 @@ public class DialogPenjualan extends javax.swing.JDialog {
         jLabel6.setText(",-");
 
         cboBanyak.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        cboBanyak.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cboBanyakMouseClicked(evt);
+            }
+        });
         cboBanyak.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboBanyakActionPerformed(evt);
@@ -194,10 +203,10 @@ public class DialogPenjualan extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Exit");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnExit.setText("Exit");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnExitActionPerformed(evt);
             }
         });
 
@@ -220,7 +229,7 @@ public class DialogPenjualan extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnTambah)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -231,7 +240,7 @@ public class DialogPenjualan extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTambah)
-                    .addComponent(jButton1))
+                    .addComponent(btnExit))
                 .addContainerGap())
         );
 
@@ -239,20 +248,42 @@ public class DialogPenjualan extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
     
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
+       Date tgl = txtDate.getSelectedDate().getTime();
+       int banyak = Integer.parseInt(cboBanyak.getSelectedItem().toString());
+       float satuan = Float.valueOf(txtSatuan.getText());
+       float jml = Float.valueOf(lblJumlah.getText());
        
-        
+       p.setTglTrskPjl(tgl);
+       p.setHrgSatuan(satuan);
+       p.setQtyPjl(banyak);
+       p.setSubTotal(jml);
+       
+       dao.tambah(p);
+       cboBanyak.setSelectedIndex(0);
+       lblJumlah.setText("0");
+        dispose();
         
     }//GEN-LAST:event_btnTambahActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        cboBanyak.setSelectedIndex(0);
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        
         lblJumlah.setText("0");
+        cboBanyak.setSelectedIndex(0);
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnExitActionPerformed
 
     private void cboBanyakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboBanyakActionPerformed
-        // TODO add your handling code here:
+        
+            int banyak = Integer.parseInt(cboBanyak.getSelectedItem().toString());
+            float satuan = Float.parseFloat(txtSatuan.getText());
+            float jml = getJumlah(banyak, satuan);
+            lblJumlah.setText(""+jml);
+        
     }//GEN-LAST:event_cboBanyakActionPerformed
+
+    private void cboBanyakMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboBanyakMouseClicked
+        
+    }//GEN-LAST:event_cboBanyakMouseClicked
     
     public float getJumlah(int qty, float harga){
         float jml = qty*harga;
@@ -264,9 +295,9 @@ public class DialogPenjualan extends javax.swing.JDialog {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnExit;
     private javax.swing.JButton btnTambah;
     private javax.swing.JComboBox cboBanyak;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
