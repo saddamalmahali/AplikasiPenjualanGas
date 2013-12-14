@@ -7,8 +7,10 @@
 package com.adam.view;
 
 import com.adam.dao.PenjualanDao;
+import com.adam.dao.PersediaanDao;
 import com.adam.dao.SettingDao;
 import com.adam.dao.impl.PenjualanDaoImpl;
+import com.adam.dao.impl.PersediaanDaoImpl;
 import com.adam.dao.impl.SettingDaoImpl;
 import com.adam.model.Penjualan;
 import com.adam.model.Persediaan;
@@ -31,6 +33,7 @@ import javax.swing.text.PlainDocument;
 public class DialogPenjualan extends javax.swing.JDialog {
     private PenjualanDao dao;
     DefaultTableModel model;
+    PersediaanDao pDao;
     Setting s;
     Penjualan p;
     Persediaan prs;
@@ -84,7 +87,8 @@ public class DialogPenjualan extends javax.swing.JDialog {
         float satuan = sDao.getSetting(new Setting(1)).getHrgStg();
         
         txtSatuan.setText(""+satuan);
-        
+        pDao = new PersediaanDaoImpl();
+        prs = pDao.getPersediaan(new Persediaan(1));
     }
     
     
@@ -257,10 +261,12 @@ public class DialogPenjualan extends javax.swing.JDialog {
        p.setHrgSatuan(satuan);
        p.setQtyPjl(banyak);
        p.setSubTotal(jml);
-       
+       prs.setJmlPrsd(prs.getJmlPrsd()-banyak);
+       pDao.edit(prs);
        dao.tambah(p);
        cboBanyak.setSelectedIndex(0);
        lblJumlah.setText("0");
+       JOptionPane.showMessageDialog(rootPane, "Transaksi berhasil disimpan..!", "Sukses!", JOptionPane.INFORMATION_MESSAGE);
         dispose();
         
     }//GEN-LAST:event_btnTambahActionPerformed
@@ -273,7 +279,7 @@ public class DialogPenjualan extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void cboBanyakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboBanyakActionPerformed
-        
+            
             int banyak = Integer.parseInt(cboBanyak.getSelectedItem().toString());
             float satuan = Float.parseFloat(txtSatuan.getText());
             float jml = getJumlah(banyak, satuan);
