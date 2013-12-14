@@ -17,6 +17,9 @@ import javax.swing.table.DefaultTableModel;
 import com.adam.model.Setting;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
 /**
  *
@@ -34,10 +37,7 @@ public class DialogPenjualan extends javax.swing.JDialog {
         this.lblJumlah = lblJumlah;
     }
 
-    public void setTxtBanyak(JTextField txtBanyak) {
-        this.txtBanyak = txtBanyak;
-    }
-
+   
     public void setTxtSatuan(JTextField txtSatuan) {
         this.txtSatuan = txtSatuan;
     }
@@ -97,7 +97,6 @@ public class DialogPenjualan extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtBanyak = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtSatuan = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -105,12 +104,14 @@ public class DialogPenjualan extends javax.swing.JDialog {
         lblJumlah = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtDate = new datechooser.beans.DateChooserCombo();
+        cboBanyak = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         btnTambah = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Tambah/Edit Penjualan");
         setAlwaysOnTop(true);
+        setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Detail Penjualan"));
         jPanel1.setToolTipText("");
@@ -121,28 +122,29 @@ public class DialogPenjualan extends javax.swing.JDialog {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Banyak :");
 
-        txtBanyak.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                txtBanyakInputMethodTextChanged(evt);
-            }
-        });
-
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Satuan :");
+
+        txtSatuan.setEditable(false);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Jumlah :");
 
-        lblRp.setFont(new java.awt.Font("DialogInput", 1, 24)); // NOI18N
+        lblRp.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         lblRp.setText("Rp.");
 
-        lblJumlah.setFont(new java.awt.Font("DialogInput", 1, 24)); // NOI18N
+        lblJumlah.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         lblJumlah.setText("0");
 
-        jLabel6.setFont(new java.awt.Font("DialogInput", 1, 24)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         jLabel6.setText(",-");
+
+        cboBanyak.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        cboBanyak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboBanyakActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -157,7 +159,6 @@ public class DialogPenjualan extends javax.swing.JDialog {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtBanyak, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
                     .addComponent(txtSatuan, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblRp)
@@ -165,7 +166,8 @@ public class DialogPenjualan extends javax.swing.JDialog {
                         .addComponent(lblJumlah)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6))
-                    .addComponent(txtDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cboBanyak, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -178,7 +180,7 @@ public class DialogPenjualan extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtBanyak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboBanyak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -193,6 +195,11 @@ public class DialogPenjualan extends javax.swing.JDialog {
         );
 
         jButton1.setText("Exit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btnTambah.setText("Tambah");
         btnTambah.addActionListener(new java.awt.event.ActionListener() {
@@ -231,25 +238,21 @@ public class DialogPenjualan extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    private void txtBanyakInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtBanyakInputMethodTextChanged
-        
-    }//GEN-LAST:event_txtBanyakInputMethodTextChanged
-
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
-        int qty = Integer.parseInt(txtBanyak.getText());
-        float harga = s.getHrgStg();
-        Date date = txtDate.getDateFormat().getCalendar().getTime();
-        float jumlah = getJumlah(qty, harga);
-        p = new Penjualan();
-        p.setTglTrskPjl(date);
-        p.setHrgSatuan(harga);
-        p.setQtyPjl(qty);
-        p.setSubTotal(jumlah);
+       
         
-        dao.tambah(p);
         
-        JOptionPane.showMessageDialog(this, "Transaksi Berhasil..!!");
     }//GEN-LAST:event_btnTambahActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        cboBanyak.setSelectedIndex(0);
+        lblJumlah.setText("0");
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cboBanyakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboBanyakActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboBanyakActionPerformed
     
     public float getJumlah(int qty, float harga){
         float jml = qty*harga;
@@ -262,6 +265,7 @@ public class DialogPenjualan extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTambah;
+    private javax.swing.JComboBox cboBanyak;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -271,7 +275,6 @@ public class DialogPenjualan extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblJumlah;
     private javax.swing.JLabel lblRp;
-    private javax.swing.JTextField txtBanyak;
     private datechooser.beans.DateChooserCombo txtDate;
     private javax.swing.JTextField txtSatuan;
     // End of variables declaration//GEN-END:variables

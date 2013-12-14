@@ -217,7 +217,7 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
         
-
+        dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
         refresh();
 
