@@ -10,6 +10,7 @@ import com.adam.controller.PenjualanJpaController;
 import com.adam.controller.exceptions.NonexistentEntityException;
 import com.adam.dao.PenjualanDao;
 import com.adam.model.Penjualan;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -76,8 +77,9 @@ public class PenjualanDaoImpl implements PenjualanDao{
             
             String hargaSatuan = "Rp. "+p.getHrgSatuan();
             String SubTotal = "Rp. "+p.getSubTotal();
-            
-            Object[] data = {p.getIdTrskPjl(), p.getTglTrskPjl().getDate(), p.getQtyPjl(), hargaSatuan, SubTotal };
+            SimpleDateFormat df = new SimpleDateFormat("dd/M/yyyy");
+            String tanggal = df.format(p.getTglTrskPjl());
+            Object[] data = {p.getIdTrskPjl(), tanggal, p.getQtyPjl(), hargaSatuan, SubTotal };
             model.addRow(data);
             model.fireTableDataChanged();
                     

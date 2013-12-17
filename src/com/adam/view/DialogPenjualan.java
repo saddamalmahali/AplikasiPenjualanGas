@@ -253,6 +253,7 @@ public class DialogPenjualan extends javax.swing.JDialog {
     
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
        Date tgl = txtDate.getSelectedDate().getTime();
+       System.out.println(tgl);
        int banyak = Integer.parseInt(cboBanyak.getSelectedItem().toString());
        float satuan = Float.valueOf(txtSatuan.getText());
        float jml = Float.valueOf(lblJumlah.getText());

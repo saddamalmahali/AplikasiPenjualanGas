@@ -37,6 +37,7 @@ import javax.swing.text.DateFormatter;
  * @author saddam
  */
 public class InternalPenjualan extends javax.swing.JInternalFrame {
+    
     DefaultTableModel model;
     PenjualanDao dao;
     Penjualan p;
@@ -44,7 +45,7 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
     FormAplikasi formUtama;
     Frame frame;
     DialogPenjualan dialog;
-    
+    DialogUpdatePenjualan dialogUp;
     
     public void setSetting(Setting setting) {
         this.setting = setting;
@@ -76,6 +77,8 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
         frame.setSize(300, 300);
         frame.pack();
         dialog = new DialogPenjualan(frame, closable);
+        dialogUp = new DialogUpdatePenjualan(frame, closable);
+        
         formUtama = getFormUtama();
         refresh();
         
@@ -226,8 +229,11 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblPenjualanMouseClicked
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        dialogUp.setIntPjl(this);
+        dialogUp.setData();
+        dialogUp.setLocationRelativeTo(null);
+        dialogUp.setVisible(true);
         
-        JOptionPane.showMessageDialog(this, "Sedang di kerjakan");
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
@@ -241,7 +247,7 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
         
-        if(p==null){
+        if(p.getIdTrskPjl()==null){
             JOptionPane.showMessageDialog(rootPane, "Pilih Data Yang akan dihapus...", "Error", JOptionPane.ERROR_MESSAGE);
         }else{
             int f = JOptionPane.showConfirmDialog(rootPane, "Apakah anda akan menghapus transaksi dengan id : "+p.getIdTrskPjl()+" ?","Konfirmasi Penghapusan",JOptionPane.OK_CANCEL_OPTION );
@@ -254,6 +260,17 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
         kosongkanData();
         refresh();
     }//GEN-LAST:event_btnHapusActionPerformed
+    
+    public Penjualan ambilDataUpdate(){
+        Penjualan p2 = new Penjualan();
+        p2.setIdTrskPjl(p.getIdTrskPjl());
+        p2.setHrgSatuan(p.getHrgSatuan());
+        p2.setQtyPjl(p.getQtyPjl());
+        p2.setSubTotal(p.getSubTotal());
+        p2.setTglTrskPjl(p.getTglTrskPjl());
+        
+        return p2;
+    }
     
     public void refresh(){
         String[] nama = {"ID Penjualan", "Tanggal", "Qty", "Harga Satuan", "Jumlah"};
@@ -273,7 +290,7 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
         
     }
     public void kosongkanData(){
-       p = null;
+       p.setIdTrskPjl(null);
     }
     private void btnDialogBatalActionPerformed(java.awt.event.ActionEvent evt) {                                         
         
