@@ -36,8 +36,10 @@ public class InternalPembelian extends javax.swing.JInternalFrame {
     
     
     
-    public InternalPembelian() {
+    public InternalPembelian(Setting setting) {
         initComponents();
+        
+        this.setting = setting;
         
     }
 

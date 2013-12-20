@@ -194,7 +194,7 @@ public class FormAplikasi extends javax.swing.JFrame {
 
     private void mniSettingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSettingActionPerformed
         if(intPbl==null)
-            intPbl = new InternalPembelian();
+            intPbl = new InternalPembelian(setting);
         if(intPbl.isVisible()){
             JOptionPane.showMessageDialog(rootPane, "Jendela Pembelian Telah Aktif", "Warning", JOptionPane.ERROR_MESSAGE);
         }else{
