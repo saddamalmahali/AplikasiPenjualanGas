@@ -6,7 +6,11 @@
 
 package com.adam.view;
 
+import com.adam.dao.PembelianDao;
+import com.adam.dao.impl.PembelianDaoImpl;
+import com.adam.model.Pembelian;
 import com.adam.model.Setting;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,9 +19,9 @@ import com.adam.model.Setting;
 public class InternalPembelian extends javax.swing.JInternalFrame {
     private FormAplikasi formUtama;
     private Setting setting;
-    
-    
-    
+    private PembelianDao pblDao;
+    private Pembelian pbl;
+    private DefaultTableModel tableModel;
     /**
      * Creates new form InternalPembelian
      */
@@ -40,9 +44,18 @@ public class InternalPembelian extends javax.swing.JInternalFrame {
         initComponents();
         
         this.setting = setting;
+        pblDao = new PembelianDaoImpl();
+        pbl = new Pembelian();
+        
+        refresh();
         
     }
-
+    public void refresh(){
+        String[] columnName = {"Id Pembelian", "Tangga Transaksi", "Qty", "Satuan", "Jumlah"};
+        tableModel = new DefaultTableModel(null, columnName);
+        pblDao.addData(tableModel);
+        tabelPembelian.setModel(tableModel);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,10 +66,13 @@ public class InternalPembelian extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelPembelian = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -65,7 +81,7 @@ public class InternalPembelian extends javax.swing.JInternalFrame {
         setTitle("Manajemen Pembelian");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/com/adam/img/Pembelian.png"))); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelPembelian.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -76,8 +92,8 @@ public class InternalPembelian extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.setToolTipText("");
-        jScrollPane1.setViewportView(jTable1);
+        tabelPembelian.setToolTipText("");
+        jScrollPane1.setViewportView(tabelPembelian);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/adam/img/1386468852_trash.png"))); // NOI18N
         jButton1.setText("Hapus");
@@ -87,6 +103,15 @@ public class InternalPembelian extends javax.swing.JInternalFrame {
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/adam/img/Close.png"))); // NOI18N
         jButton3.setText("Keluar");
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/adam/img/Refresh-15.png"))); // NOI18N
+        jButton4.setToolTipText("Refresh");
+
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/adam/img/Print.png"))); // NOI18N
+        jButton5.setToolTipText("Cetak");
+
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/adam/img/view.png"))); // NOI18N
+        jButton6.setToolTipText("Lihat Data");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,18 +124,31 @@ public class InternalPembelian extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5)
+                    .addComponent(jButton6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
@@ -127,7 +165,10 @@ public class InternalPembelian extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabelPembelian;
     // End of variables declaration//GEN-END:variables
 }

@@ -223,6 +223,7 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
         int pilih = tblPenjualan.getSelectedRow();
         
         int id = Integer.parseInt(tblPenjualan.getValueAt(pilih, 0).toString());
+        
         p = getObjectFromTable(id);
         
         System.out.println("Id Penjualan : "+p.getIdTrskPjl());
