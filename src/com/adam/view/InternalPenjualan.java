@@ -118,6 +118,7 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
+        setMaximizable(true);
         setResizable(true);
         setTitle("Transaksi Penjualan");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/com/adam/img/penjualan20.png"))); // NOI18N

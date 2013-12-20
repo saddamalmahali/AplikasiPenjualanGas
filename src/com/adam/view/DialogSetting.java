@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  *
  * @author saddam
  */
-public class Setting extends javax.swing.JDialog {
+public class DialogSetting extends javax.swing.JDialog {
 
     /**
      * Creates new form Setting
@@ -30,7 +30,7 @@ public class Setting extends javax.swing.JDialog {
         this.dao = dao;
     }
     
-    public Setting(java.awt.Frame parent, boolean modal) {
+    public DialogSetting(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setting = new com.adam.model.Setting();
@@ -186,20 +186,20 @@ public class Setting extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Setting.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogSetting.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Setting.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogSetting.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Setting.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogSetting.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Setting.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogSetting.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Setting dialog = new Setting(new javax.swing.JFrame(), true);
+                DialogSetting dialog = new DialogSetting(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
