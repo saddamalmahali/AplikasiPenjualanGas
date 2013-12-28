@@ -115,7 +115,7 @@ public class FormAplikasi extends javax.swing.JFrame {
         layerAplikasiLayout.setVerticalGroup(
             layerAplikasiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layerAplikasiLayout.createSequentialGroup()
-                .addContainerGap(255, Short.MAX_VALUE)
+                .addContainerGap(444, Short.MAX_VALUE)
                 .addGroup(layerAplikasiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layerAplikasiLayout.createSequentialGroup()
                         .addComponent(jLabel3)

@@ -69,6 +69,7 @@ public class DialogDetailPembelian extends javax.swing.JDialog {
         btnTutup = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("View");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Detail Pembelian"));
 
