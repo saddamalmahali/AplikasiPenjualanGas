@@ -56,6 +56,11 @@ public class FormAplikasi extends javax.swing.JFrame {
     private void initComponents() {
 
         layerAplikasi = new javax.swing.JDesktopPane();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel6 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
         jLabel1 = new javax.swing.JLabel();
         txtPrsdGas = new javax.swing.JTextField();
@@ -74,16 +79,60 @@ public class FormAplikasi extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aplikasi Penjualan Dan Pembelian Gas");
 
+        jLabel3.setFont(new java.awt.Font("FreeSerif", 1, 18)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel3.setText("Kopontren Annajaat Sumursari");
+
+        jLabel4.setFont(new java.awt.Font("FreeSerif", 1, 12)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel4.setText("Alamat : Kp. Sumursari, Ds. Sukasono, Kec. Sukawening-Garut");
+
+        jLabel5.setFont(new java.awt.Font("FreeSerif", 1, 12)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel5.setText("Email : yps.annajaat@gmail.com");
+
+        jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/adam/img/Logo Annajaat_1.png"))); // NOI18N
+
         javax.swing.GroupLayout layerAplikasiLayout = new javax.swing.GroupLayout(layerAplikasi);
         layerAplikasi.setLayout(layerAplikasiLayout);
         layerAplikasiLayout.setHorizontalGroup(
             layerAplikasiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(layerAplikasiLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layerAplikasiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layerAplikasiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSeparator1))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         layerAplikasiLayout.setVerticalGroup(
             layerAplikasiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 340, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layerAplikasiLayout.createSequentialGroup()
+                .addContainerGap(255, Short.MAX_VALUE)
+                .addGroup(layerAplikasiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layerAplikasiLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
+        layerAplikasi.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        layerAplikasi.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        layerAplikasi.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        layerAplikasi.setLayer(jSeparator1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        layerAplikasi.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
@@ -153,10 +202,10 @@ public class FormAplikasi extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(layerAplikasi)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE))
+                .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE))
+            .addComponent(layerAplikasi)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,10 +288,15 @@ public class FormAplikasi extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JDesktopPane layerAplikasi;
     private javax.swing.JMenuItem mniExit;
