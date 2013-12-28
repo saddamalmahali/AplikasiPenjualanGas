@@ -63,10 +63,11 @@ public class FormAplikasi extends javax.swing.JFrame {
         txtHrgDefault = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         mniPjl = new javax.swing.JMenu();
-        mniPbl = new javax.swing.JMenuItem();
-        mniSetting = new javax.swing.JMenuItem();
         mniExit = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        mniPbl = new javax.swing.JMenuItem();
+        mniSetting = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         mniTentang = new javax.swing.JMenuItem();
 
@@ -101,22 +102,6 @@ public class FormAplikasi extends javax.swing.JFrame {
 
         mniPjl.setText("Menu");
 
-        mniPbl.setText("Penjualan");
-        mniPbl.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniPblActionPerformed(evt);
-            }
-        });
-        mniPjl.add(mniPbl);
-
-        mniSetting.setText("Pembelian");
-        mniSetting.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniSettingActionPerformed(evt);
-            }
-        });
-        mniPjl.add(mniSetting);
-
         mniExit.setText("Setting");
         mniExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,9 +111,34 @@ public class FormAplikasi extends javax.swing.JFrame {
         mniPjl.add(mniExit);
 
         jMenuItem4.setText("Exit");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         mniPjl.add(jMenuItem4);
 
         jMenuBar1.add(mniPjl);
+
+        jMenu1.setText("Transaksi");
+
+        mniPbl.setText("Penjualan");
+        mniPbl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniPblActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mniPbl);
+
+        mniSetting.setText("Pembelian");
+        mniSetting.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniSettingActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mniSetting);
+
+        jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Help");
 
@@ -185,7 +195,7 @@ public class FormAplikasi extends javax.swing.JFrame {
         settingView = new DialogSetting(this, true);
         settingView.setDao(sDao);
         settingView.setTxtHrg(String.valueOf(sDao.getSetting(setting).getHrgStg()));
-        
+        settingView.setLocationRelativeTo(null);
         settingView.setVisible(true);
         settingView.setAlwaysOnTop(true);
         refresh();
@@ -210,6 +220,10 @@ public class FormAplikasi extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_mniSettingActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
     
     public void refresh(){
         setting = sDao.getSetting(new com.adam.model.Setting(1));
@@ -225,6 +239,7 @@ public class FormAplikasi extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem4;

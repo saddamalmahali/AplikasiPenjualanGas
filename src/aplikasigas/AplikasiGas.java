@@ -6,6 +6,7 @@
 package aplikasigas;
 
 import com.adam.view.FormAplikasi;
+import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 
 /**
@@ -28,7 +29,7 @@ public class AplikasiGas {
 
             @Override
             public void run() {
-                
+                form.setIconImage(new ImageIcon(form.getClass().getResource("/com/adam/img/penjualan20.png")).getImage());
                 form.setVisible(true);
                 
             }

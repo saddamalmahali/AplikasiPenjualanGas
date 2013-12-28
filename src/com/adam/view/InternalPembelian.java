@@ -23,6 +23,8 @@ public class InternalPembelian extends javax.swing.JInternalFrame {
     private PembelianDao pblDao;
     private Pembelian pbl;
     private DefaultTableModel tableModel;    
+    private DialogPembelian dPbl;
+    private DialogDetailPembelian dDPbl;
     /**
      * Creates new form InternalPembelian
      */
@@ -47,6 +49,7 @@ public class InternalPembelian extends javax.swing.JInternalFrame {
         this.setting = setting;
         pblDao = new PembelianDaoImpl();
         pbl = new Pembelian();
+        
         
         refresh();
         
@@ -113,9 +116,19 @@ public class InternalPembelian extends javax.swing.JInternalFrame {
 
         btnTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/adam/img/1386468450_Create.png"))); // NOI18N
         btnTambah.setText("Tambah");
+        btnTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTambahActionPerformed(evt);
+            }
+        });
 
         btnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/adam/img/Close.png"))); // NOI18N
         btnKeluar.setText("Keluar");
+        btnKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKeluarActionPerformed(evt);
+            }
+        });
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/adam/img/Refresh-15.png"))); // NOI18N
         jButton4.setToolTipText("Refresh");
@@ -127,9 +140,20 @@ public class InternalPembelian extends javax.swing.JInternalFrame {
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/adam/img/Print.png"))); // NOI18N
         jButton5.setToolTipText("Cetak");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         btnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/adam/img/view.png"))); // NOI18N
         btnView.setToolTipText("Lihat Data");
+        btnView.setEnabled(false);
+        btnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -187,6 +211,7 @@ public class InternalPembelian extends javax.swing.JInternalFrame {
         int id = (int) tabelPembelian.getValueAt(pilih, 0);
         pbl = getObjectFromTable(id);
         btnHapus.setEnabled(true);
+        btnView.setEnabled(true);
         System.out.println("Id Pembelian : "+id);
     }//GEN-LAST:event_tabelPembelianMouseClicked
 
@@ -197,6 +222,28 @@ public class InternalPembelian extends javax.swing.JInternalFrame {
         refresh();
         btnHapus.setEnabled(false);
     }//GEN-LAST:event_btnHapusActionPerformed
+
+    private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
+        dPbl = new DialogPembelian(formUtama, closable);
+        dPbl.setLocationRelativeTo(null);
+        dPbl.setVisible(true);
+        formUtama.refresh();
+        refresh();
+    }//GEN-LAST:event_btnTambahActionPerformed
+
+    private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnKeluarActionPerformed
+
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+        dDPbl = new DialogDetailPembelian(formUtama, closable, pbl);
+        dDPbl.setLocationRelativeTo(null);
+        dDPbl.setVisible(true);
+    }//GEN-LAST:event_btnViewActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        JOptionPane.showMessageDialog(rootPane, "Sedang dalam pengerjaan", "Pesan", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     public Pembelian getObjectFromTable(int id){
         Pembelian pbl1 = pblDao.getPembelian(id);
