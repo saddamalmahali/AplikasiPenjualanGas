@@ -6,7 +6,7 @@
 
 package com.adam.controller;
 
-import com.adam.controller.exceptions.NonexistentEntityException;
+import aplikasigas.exceptions.NonexistentEntityException;
 import com.adam.model.Pembelian;
 import java.io.Serializable;
 import java.util.List;

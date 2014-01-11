@@ -43,9 +43,8 @@ public class PembelianDaoImpl implements PembelianDao{
     public void hapus(int idPbl) {
         try {
             controller.destroy(idPbl);
-        } catch (NonexistentEntityException ex) {
+        } catch (aplikasigas.exceptions.NonexistentEntityException ex) {
             Logger.getLogger(PembelianDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
-            System.err.println(ex.getMessage());
         }finally{
             System.out.println("Data Pembelian dengan id "+idPbl+" berhasil dihapus..");
         }
