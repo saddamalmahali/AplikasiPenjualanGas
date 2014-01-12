@@ -5,18 +5,28 @@
  */
 package com.adam.report.model;
 
+import java.util.Date;
+
 /**
  *
  * @author saddam
  */
-public class PenjualanRpt {
+public class PembelianRpt {
 
-    private String id;
-    private String tanggal;
-    private String banyak;
-    private String satuan;
-    private String subtotal;
-    private String total;
+    String id;
+    Date tanggal;
+    int banyak;
+    String satuan;
+    String subtotal;
+    String total;
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
+    }
 
     public String getId() {
         return id;
@@ -26,19 +36,19 @@ public class PenjualanRpt {
         this.id = id;
     }
 
-    public String getTanggal() {
+    public Date getTanggal() {
         return tanggal;
     }
 
-    public void setTanggal(String tanggal) {
+    public void setTanggal(Date tanggal) {
         this.tanggal = tanggal;
     }
 
-    public String getBanyak() {
+    public int getBanyak() {
         return banyak;
     }
 
-    public void setBanyak(String banyak) {
+    public void setBanyak(int banyak) {
         this.banyak = banyak;
     }
 
@@ -48,14 +58,6 @@ public class PenjualanRpt {
 
     public void setSatuan(String satuan) {
         this.satuan = satuan;
-    }
-
-    public String getJumlah() {
-        return total;
-    }
-
-    public void setJumlah(String total) {
-        this.total=total;
     }
 
     public String getSubtotal() {

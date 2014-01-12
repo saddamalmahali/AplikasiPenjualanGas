@@ -1,35 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="479"/>
-	<property name="ireport.y" value="144"/>
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="751"/>
+	<property name="ireport.y" value="516"/>
 	<field name="id" class="java.lang.String"/>
-	<field name="tanggal" class="java.lang.String"/>
-	<field name="banyak" class="java.lang.String"/>
+	<field name="tanggal" class="java.util.Date"/>
+	<field name="banyak" class="java.lang.Integer"/>
 	<field name="satuan" class="java.lang.String"/>
-	<field name="jumlah" class="java.lang.String"/>
 	<field name="subtotal" class="java.lang.String"/>
-	<group name="Subtotal">
-		<groupExpression><![CDATA[$F{subtotal}]]></groupExpression>
+	<field name="total" class="java.lang.String"/>
+	<group name="total">
+		<groupExpression><![CDATA[$F{total}]]></groupExpression>
 		<groupFooter>
-			<band height="22">
+			<band height="143">
 				<textField>
-					<reportElement mode="Opaque" x="426" y="0" width="100" height="20" backcolor="#CCCCCC"/>
+					<reportElement mode="Opaque" x="426" y="-1" width="100" height="20" backcolor="#CCCCCC"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
-						<font fontName="Bitstream Charter" size="10" isBold="true"/>
+						<font isBold="true"/>
 					</textElement>
-					<textFieldExpression class="java.lang.String"><![CDATA[$F{subtotal}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{total}]]></textFieldExpression>
 				</textField>
-				<staticText>
-					<reportElement x="244" y="1" width="180" height="18" forecolor="#666666"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
-						<font size="10" isBold="false"/>
-					</textElement>
-					<text><![CDATA[Jumlah :]]></text>
-				</staticText>
 				<line>
-					<reportElement x="427" y="19" width="99" height="1"/>
+					<reportElement x="426" y="19" width="100" height="1"/>
 				</line>
+				<lineChart>
+					<chart>
+						<reportElement x="200" y="38" width="200" height="100"/>
+						<chartTitle/>
+						<chartSubtitle/>
+						<chartLegend/>
+					</chart>
+					<categoryDataset>
+						<categorySeries>
+							<seriesExpression><![CDATA["Dummy Series"]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{tanggal}.getMonth()]]></categoryExpression>
+							<valueExpression><![CDATA[$F{banyak}]]></valueExpression>
+						</categorySeries>
+					</categoryDataset>
+					<linePlot>
+						<plot/>
+						<categoryAxisFormat>
+							<axisFormat/>
+						</categoryAxisFormat>
+						<valueAxisFormat>
+							<axisFormat/>
+						</valueAxisFormat>
+					</linePlot>
+				</lineChart>
 			</band>
 		</groupFooter>
 	</group>
@@ -37,100 +54,89 @@
 		<band/>
 	</background>
 	<title>
-		<band height="82">
+		<band height="72">
 			<frame>
-				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="101" backcolor="#33CC00"/>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699"/>
 				<staticText>
-					<reportElement x="85" y="20" width="328" height="30" forecolor="#FFFFFF"/>
+					<reportElement x="98" y="20" width="375" height="31" forecolor="#FFFFFF"/>
 					<textElement lineSpacing="Single">
-						<font fontName="Caladea" size="24" isBold="true"/>
+						<font size="24" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Koperasi Pondok Pesantren]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF"/>
+					<reportElement x="395" y="63" width="180" height="20" forecolor="#FFFFFF"/>
 					<textElement textAlignment="Right" lineSpacing="Single">
-						<font size="14" isBold="false"/>
+						<font size="14" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Laporan Penjualan]]></text>
+					<text><![CDATA[Laporan Pembelian]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="85" y="50" width="328" height="30" forecolor="#FFFFFF"/>
+					<reportElement x="99" y="48" width="375" height="31" forecolor="#FFFFFF"/>
 					<textElement lineSpacing="Single">
-						<font fontName="Caladea" size="24" isBold="true"/>
+						<font size="24" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Annajaat Sumursari]]></text>
 				</staticText>
 				<image>
-					<reportElement x="9" y="10" width="74" height="73"/>
+					<reportElement x="15" y="11" width="74" height="73"/>
 					<imageExpression class="java.lang.String"><![CDATA["/home/saddam/NetBeansProjects/AplikasiGas/src/com/adam/img/Logo Annajaat_1.png"]]></imageExpression>
 				</image>
 			</frame>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="23">
-			<staticText>
-				<reportElement x="317" y="0" width="100" height="20"/>
-				<textElement verticalAlignment="Bottom" lineSpacing="Single"/>
-				<text><![CDATA[Per Tanggal :]]></text>
-			</staticText>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="385" y="-1" width="100" height="20"/>
-				<textElement verticalAlignment="Bottom" lineSpacing="Single"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
-		</band>
+		<band height="13"/>
 	</pageHeader>
 	<columnHeader>
 		<band height="21">
 			<staticText>
-				<reportElement mode="Opaque" x="29" y="0" width="100" height="20" backcolor="#00CC99"/>
+				<reportElement mode="Opaque" x="30" y="0" width="100" height="20" backcolor="#CCCCCC"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="129" y="0" width="100" height="20" backcolor="#00CC99"/>
+				<reportElement mode="Opaque" x="129" y="0" width="100" height="20" backcolor="#CCCCCC"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tanggal]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="228" y="0" width="100" height="20" backcolor="#00CC99"/>
+				<reportElement mode="Opaque" x="228" y="0" width="100" height="20" backcolor="#CCCCCC"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Banyak]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="327" y="0" width="100" height="20" backcolor="#00CC99"/>
+				<reportElement mode="Opaque" x="327" y="0" width="100" height="20" backcolor="#CCCCCC"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Satuan]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="426" y="0" width="100" height="20" backcolor="#00CC99"/>
+				<reportElement mode="Opaque" x="426" y="0" width="100" height="20" backcolor="#CCCCCC"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Jumlah]]></text>
+				<text><![CDATA[Subtotal]]></text>
 			</staticText>
 			<line>
-				<reportElement x="29" y="20" width="497" height="1"/>
+				<reportElement x="30" y="20" width="496" height="1" forecolor="#666666"/>
 			</line>
 			<line>
-				<reportElement x="29" y="0" width="497" height="1"/>
+				<reportElement x="30" y="0" width="496" height="1" forecolor="#666666"/>
 			</line>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="21">
+		<band height="20">
 			<textField>
-				<reportElement x="29" y="0" width="101" height="20"/>
+				<reportElement x="30" y="0" width="100" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
@@ -152,35 +158,35 @@
 			<textField>
 				<reportElement x="426" y="0" width="100" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{jumlah}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{subtotal}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="29" y="19" width="497" height="1"/>
+				<reportElement x="30" y="18" width="496" height="1" forecolor="#666666"/>
 			</line>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="21"/>
+		<band/>
 	</columnFooter>
 	<pageFooter>
-		<band height="24">
+		<band height="17">
 			<textField>
-				<reportElement mode="Opaque" x="0" y="2" width="515" height="13" backcolor="#E6E6E6"/>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6"/>
 				<textElement textAlignment="Right" lineSpacing="Single"/>
 				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement mode="Opaque" x="515" y="2" width="40" height="13" backcolor="#E6E6E6"/>
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6"/>
 				<textElement lineSpacing="Single"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
-			<textField pattern="d/M/yyyy">
-				<reportElement x="0" y="2" width="100" height="13"/>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13"/>
 				<textElement lineSpacing="Single"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="2" width="555" height="1"/>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="4" width="555" height="1"/>
 			</line>
 		</band>
 	</pageFooter>

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.adam.view;
 
 import com.adam.dao.PenjualanDao;
@@ -31,6 +30,7 @@ import javax.swing.text.PlainDocument;
  * @author saddam
  */
 public class DialogPenjualan extends javax.swing.JDialog {
+
     private PenjualanDao dao;
     DefaultTableModel model;
     PersediaanDao pDao;
@@ -38,17 +38,15 @@ public class DialogPenjualan extends javax.swing.JDialog {
     Penjualan p;
     Persediaan prs;
     SettingDao sDao;
+    float satuan;
     
     public void setLblJumlah(JLabel lblJumlah) {
         this.lblJumlah = lblJumlah;
     }
 
-   
     public void setTxtSatuan(JTextField txtSatuan) {
         this.txtSatuan = txtSatuan;
     }
-
-    
 
     public void setP(Penjualan p) {
         this.p = p;
@@ -65,34 +63,24 @@ public class DialogPenjualan extends javax.swing.JDialog {
     public void setPrs(Persediaan prs) {
         this.prs = prs;
     }
-    
-    
-    
+
     /**
      * Creates new form DialogPenjualan
      */
-    
-    
-    
-
-    
-    
     public DialogPenjualan(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         sDao = new SettingDaoImpl();
         dao = new PenjualanDaoImpl();
         p = new Penjualan();
-        float satuan = sDao.getSetting(new Setting(1)).getHrgStg();
-        
-        txtSatuan.setText(""+satuan);
+        satuan = sDao.getSetting(new Setting(1)).getHrgStg();
+
+        txtSatuan.setText("Rp. " + satuan+",-");
         pDao = new PersediaanDaoImpl();
         prs = pDao.getPersediaan(new Persediaan(1));
     }
-    
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -250,56 +238,67 @@ public class DialogPenjualan extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
-       Date tgl = txtDate.getSelectedDate().getTime();
-       System.out.println(tgl);
-       int banyak = Integer.parseInt(cboBanyak.getSelectedItem().toString());
-       float satuan = Float.valueOf(txtSatuan.getText());
-       float jml = Float.valueOf(lblJumlah.getText());
-       
-       p.setTglTrskPjl(tgl);
-       p.setHrgSatuan(satuan);
-       p.setQtyPjl(banyak);
-       p.setSubTotal(jml);
-       prs.setJmlPrsd(prs.getJmlPrsd()-banyak);
-       pDao.edit(prs);
-       dao.tambah(p);
-       cboBanyak.setSelectedIndex(0);
-       lblJumlah.setText("0");
-       JOptionPane.showMessageDialog(rootPane, "Transaksi berhasil disimpan..!", "Sukses!", JOptionPane.INFORMATION_MESSAGE);
-        dispose();
         
+        int banyak = Integer.parseInt(cboBanyak.getSelectedItem().toString());
+        System.out.println(banyak);
+        System.out.println(prs.getJmlPrsd());
+        System.out.print((prs.getJmlPrsd()-banyak) >= 0);
+        if ((prs.getJmlPrsd()-banyak) >= 0) {
+            Date tgl = txtDate.getSelectedDate().getTime();
+
+            
+            float jml = Float.valueOf(lblJumlah.getText());
+
+            p.setTglTrskPjl(tgl);
+            p.setHrgSatuan(satuan);
+            p.setQtyPjl(banyak);
+            p.setSubTotal(jml);
+            prs.setJmlPrsd(prs.getJmlPrsd() - banyak);
+            pDao.edit(prs);
+            dao.tambah(p);
+            cboBanyak.setSelectedIndex(0);
+            lblJumlah.setText("0");
+            JOptionPane.showMessageDialog(rootPane, "Transaksi berhasil disimpan..!", "Sukses!", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+            
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Barang Tidak Cukup untuk pengeluaran !", "Error", JOptionPane.ERROR_MESSAGE);
+            
+        }
+
+
     }//GEN-LAST:event_btnTambahActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        
+
         lblJumlah.setText("0");
         cboBanyak.setSelectedIndex(0);
         dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void cboBanyakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboBanyakActionPerformed
-            
-            int banyak = Integer.parseInt(cboBanyak.getSelectedItem().toString());
-            float satuan = Float.parseFloat(txtSatuan.getText());
-            float jml = getJumlah(banyak, satuan);
-            lblJumlah.setText(""+jml);
+
+        int banyak = Integer.parseInt(cboBanyak.getSelectedItem().toString());
         
+        float jml = getJumlah(banyak, satuan);
+        lblJumlah.setText("" + jml);
+
     }//GEN-LAST:event_cboBanyakActionPerformed
 
     private void cboBanyakMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboBanyakMouseClicked
-        
+
     }//GEN-LAST:event_cboBanyakMouseClicked
-    
-    public float getJumlah(int qty, float harga){
-        float jml = qty*harga;
+
+    public float getJumlah(int qty, float harga) {
+        float jml = qty * harga;
         return jml;
     }
     /**
      * @param args the command line arguments
      */
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;

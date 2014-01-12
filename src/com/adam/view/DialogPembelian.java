@@ -29,7 +29,7 @@ public class DialogPembelian extends javax.swing.JDialog {
     private PersediaanDao prsDao;
     private Pembelian pbl;
     private Persediaan prs;
-    
+    private float satuan;
     
     /**
      * Creates new form DialogPembelian
@@ -43,9 +43,9 @@ public class DialogPembelian extends javax.swing.JDialog {
         prsDao = new PersediaanDaoImpl();
         pbl = new Pembelian();
         
-        float satuan = sDao.getSetting(new Setting(1)).getHrgStg();
+        satuan = sDao.getSetting(new Setting(2)).getHrgStg();
         
-        txtHrgSatuan.setText(""+satuan);
+        txtHrgSatuan.setText("Rp. "+satuan+",-");
         
         prsDao = new PersediaanDaoImpl();
         prs = prsDao.getPersediaan(new Persediaan(1));
@@ -113,7 +113,7 @@ public class DialogPembelian extends javax.swing.JDialog {
         jLabel7.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         jLabel7.setText(",-");
 
-        cboQty.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        cboQty.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40" }));
         cboQty.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cboQtyMouseClicked(evt);
@@ -240,28 +240,34 @@ public class DialogPembelian extends javax.swing.JDialog {
 
     private void cboQtyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboQtyActionPerformed
         int banyak = Integer.parseInt(cboQty.getSelectedItem().toString());
-        float satuan = Float.valueOf(txtHrgSatuan.getText());
+        float satuan2 = satuan;
         float jumlah = getJumlah(banyak, satuan);
         lblJml.setText(""+jumlah);
     }//GEN-LAST:event_cboQtyActionPerformed
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        Date tanggal = txtTanggal.getSelectedDate().getTime();
-        int banyak = Integer.parseInt(cboQty.getSelectedItem().toString());
-        float satuan = Float.valueOf(txtHrgSatuan.getText());
-        float jumlah = Float.valueOf(lblJml.getText());
+            int banyak = Integer.parseInt(cboQty.getSelectedItem().toString());
         
-        pbl.setTglTrskPbl(tanggal);
-        pbl.setQtyTrskPbl(banyak);
-        pbl.setSatuanTrskPbl(satuan);
-        pbl.setSubtotalTrskPbl(jumlah);
+        if((prs.getJmlPrsd()+banyak)<=40){
+            Date tanggal = txtTanggal.getSelectedDate().getTime();
+            
+            
+            float jumlah = Float.valueOf(lblJml.getText());
         
-        prs.setJmlPrsd(prs.getJmlPrsd()+banyak);
-        prsDao.edit(prs);
-        pDao.tambah(pbl);
+            pbl.setTglTrskPbl(tanggal);
+            pbl.setQtyTrskPbl(banyak);
+            pbl.setSatuanTrskPbl(satuan);
+            pbl.setSubtotalTrskPbl(jumlah);
+            prs.setJmlPrsd(prs.getJmlPrsd()+banyak);
+            prsDao.edit(prs);
+            pDao.tambah(pbl);
+
+            JOptionPane.showMessageDialog(rootPane, "Transaksi berhasil disimpan..", "Transaksi Berhasil", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Persediaan Melebihi Maksimal", "Error", JOptionPane.ERROR_MESSAGE);
+        }
         
-        JOptionPane.showMessageDialog(rootPane, "Transaksi berhasil disimpan..", "Transaksi Berhasil", JOptionPane.INFORMATION_MESSAGE);
-        dispose();
         
     }//GEN-LAST:event_btnOkActionPerformed
     

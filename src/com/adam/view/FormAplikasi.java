@@ -11,6 +11,7 @@ import com.adam.dao.SettingDao;
 import com.adam.dao.impl.PersediaanDaoImpl;
 import com.adam.dao.impl.SettingDaoImpl;
 import com.adam.model.Persediaan;
+import com.adam.model.Setting;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,12 +28,14 @@ public class FormAplikasi extends javax.swing.JFrame {
     /**
      * Creates new form FormAplikasi
      */
+    private DialogSettingPembelian dialogStgPbl;
     InternalPembelian intPbl;
     SettingDao sDao;
     DialogSetting settingView;
     PersediaanDao pDao;
     Persediaan persediaan;
     com.adam.model.Setting setting;
+    Setting settingPbl;
     public FormAplikasi() {
         initComponents();
         
@@ -41,6 +44,7 @@ public class FormAplikasi extends javax.swing.JFrame {
         pDao = new PersediaanDaoImpl();
         persediaan = new Persediaan(1);
         setting = new com.adam.model.Setting(1);
+        settingPbl = new Setting(2);
         refresh();
         txtHrgDefault.setText("Rp. "+setting.getHrgStg());
        
@@ -67,8 +71,9 @@ public class FormAplikasi extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtHrgDefault = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
-        mniPjl = new javax.swing.JMenu();
+        mniStgPbl = new javax.swing.JMenu();
         mniExit = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         mniPbl = new javax.swing.JMenuItem();
@@ -149,15 +154,23 @@ public class FormAplikasi extends javax.swing.JFrame {
         txtHrgDefault.setEditable(false);
         jToolBar1.add(txtHrgDefault);
 
-        mniPjl.setText("Menu");
+        mniStgPbl.setText("Menu");
 
-        mniExit.setText("Setting");
+        mniExit.setText("Setting Penjualan");
         mniExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniExitActionPerformed(evt);
             }
         });
-        mniPjl.add(mniExit);
+        mniStgPbl.add(mniExit);
+
+        jMenuItem1.setText("Setting Pembelian");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        mniStgPbl.add(jMenuItem1);
 
         jMenuItem4.setText("Exit");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -165,9 +178,9 @@ public class FormAplikasi extends javax.swing.JFrame {
                 jMenuItem4ActionPerformed(evt);
             }
         });
-        mniPjl.add(jMenuItem4);
+        mniStgPbl.add(jMenuItem4);
 
-        jMenuBar1.add(mniPjl);
+        jMenuBar1.add(mniStgPbl);
 
         jMenu1.setText("Transaksi");
 
@@ -273,6 +286,16 @@ public class FormAplikasi extends javax.swing.JFrame {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        dialogStgPbl = new DialogSettingPembelian(this, true);
+        dialogStgPbl.setDao(sDao);
+        dialogStgPbl.setTxtHrg(String.valueOf(sDao.getSetting(settingPbl).getHrgStg()));
+        dialogStgPbl.setLocationRelativeTo(null);
+        dialogStgPbl.setVisible(true);
+        dialogStgPbl.setAlwaysOnTop(true);
+        refresh();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
     
     public void refresh(){
         setting = sDao.getSetting(new com.adam.model.Setting(1));
@@ -295,14 +318,15 @@ public class FormAplikasi extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JDesktopPane layerAplikasi;
     private javax.swing.JMenuItem mniExit;
     private javax.swing.JMenuItem mniPbl;
-    private javax.swing.JMenu mniPjl;
     private javax.swing.JMenuItem mniSetting;
+    private javax.swing.JMenu mniStgPbl;
     private javax.swing.JMenuItem mniTentang;
     private javax.swing.JTextField txtHrgDefault;
     private javax.swing.JTextField txtPrsdGas;

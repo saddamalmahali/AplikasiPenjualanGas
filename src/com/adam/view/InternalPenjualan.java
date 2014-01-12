@@ -16,6 +16,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
 
 /**
@@ -54,7 +56,7 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
         this.setting = setting;
         dao = new PenjualanDaoImpl();
         p = new Penjualan();
-        report = new Report();
+        
         frame = new Frame();
         frame.setLocationRelativeTo(null);
         frame.setSize(300, 300);
@@ -65,8 +67,10 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
         formUtama = getFormUtama();
         refresh();
 
-        tblPenjualan.setCellSelectionEnabled(true);
-
+        tblPenjualan.setCellSelectionEnabled(false);
+        
+        tblPenjualan.setAutoCreateRowSorter(true);
+        
     }
 
     /**
@@ -261,8 +265,9 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
         try {
-
-            JasperViewer.viewReport(report.view(), false);
+            report = new Report();
+            JasperPrint print = report.view();
+            JasperViewer.viewReport(print, false);
         } catch (JRException ex) {
             Logger.getLogger(InternalPenjualan.class.getName()).log(Level.SEVERE, null, ex);
         }
