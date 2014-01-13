@@ -205,6 +205,11 @@ public class FormAplikasi extends javax.swing.JFrame {
         jMenu2.setText("Help");
 
         mniTentang.setText("Tentang Aplikasi");
+        mniTentang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniTentangActionPerformed(evt);
+            }
+        });
         jMenu2.add(mniTentang);
 
         jMenuBar1.add(jMenu2);
@@ -296,6 +301,14 @@ public class FormAplikasi extends javax.swing.JFrame {
         dialogStgPbl.setAlwaysOnTop(true);
         refresh();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void mniTentangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniTentangActionPerformed
+        DialogAbout about = new DialogAbout(this, rootPaneCheckingEnabled);
+        about.setLocationRelativeTo(null);
+        about.setAlwaysOnTop(true);
+            about.setVisible(true);
+        
+    }//GEN-LAST:event_mniTentangActionPerformed
     
     public void refresh(){
         setting = sDao.getSetting(new com.adam.model.Setting(1));
