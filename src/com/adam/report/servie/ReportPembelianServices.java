@@ -31,6 +31,7 @@ public class ReportPembelianServices {
             
         }
         rpt.setTotal("Rp. "+jumlah+",-");
+        rpt.setSubtotal("Rp. "+pbl.getSubtotalTrskPbl()+",-");
         return rpt;
     }
     

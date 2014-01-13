@@ -10,8 +10,15 @@ import com.adam.dao.PembelianDao;
 import com.adam.dao.impl.PembelianDaoImpl;
 import com.adam.model.Pembelian;
 import com.adam.model.Setting;
+import com.adam.report.controller.ReportPembelianController;
+import com.adam.report.servie.ReportPembelianServices;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -25,6 +32,7 @@ public class InternalPembelian extends javax.swing.JInternalFrame {
     private DefaultTableModel tableModel;    
     private DialogPembelian dPbl;
     private DialogDetailPembelian dDPbl;
+    private ReportPembelianController controllerRpt;
     /**
      * Creates new form InternalPembelian
      */
@@ -242,7 +250,14 @@ public class InternalPembelian extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnViewActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Sedang dalam pengerjaan", "Pesan", JOptionPane.INFORMATION_MESSAGE);
+        controllerRpt = new ReportPembelianController();
+        JasperPrint print = null;
+        try {
+            print = controllerRpt.view();
+        } catch (JRException ex) {
+            Logger.getLogger(InternalPembelian.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JasperViewer.viewReport(print, false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     public Pembelian getObjectFromTable(int id){

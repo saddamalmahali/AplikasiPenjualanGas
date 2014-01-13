@@ -29,13 +29,13 @@ import net.sf.jasperreports.engine.util.JRLoader;
  *
  * @author saddam
  */
-public class ReportPenjualanController {
+public class ReportPembelianController {
     private List<Pembelian> listPbl;
     private PembelianDao pDao;
     private List<PembelianRpt> listPblRpt;
     private ReportPembelianServices rptPblSrv;
 
-    public ReportPenjualanController() {
+    public ReportPembelianController() {
         pDao = new PembelianDaoImpl();
         
         listPbl = pDao.getAllPembelian();
