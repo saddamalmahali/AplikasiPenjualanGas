@@ -12,11 +12,14 @@ import javax.swing.SwingUtilities;
 /**
  *
  * @author saddam
+ * 
  */
 public class AplikasiGas {
 
     /**
+     * 
      * @param args the command line arguments
+     * 
      */
     
     public static void main(String[] args) {
@@ -29,6 +32,7 @@ public class AplikasiGas {
 
             @Override
             public void run() {
+                
                 form.setIconImage(new ImageIcon(form.getClass().getResource("/com/adam/img/penjualan20.png")).getImage());
                 form.setVisible(true);
                 
