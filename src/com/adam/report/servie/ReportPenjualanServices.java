@@ -36,7 +36,7 @@ public class ReportPenjualanServices {
         }
         
         String subtotal = "Rp. "+jumlah;
-        System.out.println(subtotal);
+        
         pjlRpt.setSubtotal(subtotal);
         return pjlRpt;
     }

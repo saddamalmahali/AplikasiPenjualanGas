@@ -56,7 +56,7 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
         this.setting = setting;
         dao = new PenjualanDaoImpl();
         p = new Penjualan();
-        
+
         frame = new Frame();
         frame.setLocationRelativeTo(null);
         frame.setSize(300, 300);
@@ -68,9 +68,9 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
         refresh();
 
         tblPenjualan.setCellSelectionEnabled(false);
-        
+
         tblPenjualan.setAutoCreateRowSorter(true);
-        
+
     }
 
     /**
@@ -267,6 +267,7 @@ public class InternalPenjualan extends javax.swing.JInternalFrame {
         try {
             report = new Report();
             JasperPrint print = report.view();
+            print.setName("Laporan Penjualan");
             JasperViewer.viewReport(print, false);
         } catch (JRException ex) {
             Logger.getLogger(InternalPenjualan.class.getName()).log(Level.SEVERE, null, ex);
