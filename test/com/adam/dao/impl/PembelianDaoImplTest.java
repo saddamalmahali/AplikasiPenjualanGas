@@ -47,7 +47,7 @@ public class PembelianDaoImplTest {
     @Test
     public void testTambah() {
         System.out.println("tambah");
-        Pembelian pbl = null;
+        Pembelian pbl = new Pembelian();
         PembelianDaoImpl instance = new PembelianDaoImpl();
         instance.tambah(pbl);
         // TODO review the generated test code and remove the default call to fail.
